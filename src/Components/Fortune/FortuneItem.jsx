@@ -15,7 +15,7 @@ const FortuneItem = (props) => {
             </div>
             <div className="fortune__desc-item">игры от <span>$ {props.startPrice}</span></div>
         </div>
-        <div className="fortune__discount">-{Math.round((props.priceMain * 100) / props.priceOld)}%</div>
+        <div className="fortune__discount">-{100-(Math.round((props.priceMain * 100) / props.priceOld))}%</div>
         <div className="fortune__price">
             <div className="fortune__price-main">$ {props.priceMain}</div>
             <div className="fortune__price-old">$ {props.priceOld}</div>

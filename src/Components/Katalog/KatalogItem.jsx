@@ -12,7 +12,7 @@ const KatalogItem = (props) => {
                 <div className="katalog__price-main">{props.priceMain}₽</div>
                 <div className="katalog__price-old">{props.priceOld}₽</div>
             </div>
-            <div className="katalog__discount">-{Math.round((props.priceMain * 100) / props.priceOld)}%</div>
+            <div className="katalog__discount">-{100-(Math.round((props.priceMain * 100) / props.priceOld))}%</div>
             <div className="katalog__title">
                 <h4>{props.titleGame}</h4>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

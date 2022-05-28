@@ -1,7 +1,11 @@
+import React from 'react'
+
 import Currency from "../Common/Currency"
 import Language from "../Common/Language"
 
 function Header() {
+    const [activeMenu, setActiveMenu] = React.useState(false)
+
     const navbar = [
         {
             title: "Товары",
@@ -24,10 +28,9 @@ function Header() {
     return (
         <header className="header">
             <div className="container">
-                <div className="header__mobile-btn">
-                    <label className="main-menu-btn-icon"> 
-                        <input type="checkbox" id="menu-bar" />
-                    </label>
+                <div className="header__mobile-btn" >
+                    <input type="checkbox" id="menu-bar" />
+                    <label className="main-menu-btn-icon" htmlFor="menu-bar" onClick={()=>setActiveMenu(!activeMenu)}/> 
                 </div>
                 <button className="header__logo">
                     <svg width="54" height="57" viewBox="0 0 54 57" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -45,7 +48,7 @@ function Header() {
                     </svg>
                     <div className="header__logo-txt">Game Monster</div>
                 </button>
-                <div className="header__middle">
+                <div className={activeMenu ? "header__mobile" : "header__middle"} >
                     <Language />
                     <div className="header__menu">
                         <nav className="navbar">
