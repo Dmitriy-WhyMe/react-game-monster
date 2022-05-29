@@ -2,10 +2,13 @@ import React from 'react'
 import TitleRow from '../../../Components/Common/TitlteRow'
 import KatalogItem from '../../../Components/Katalog/KatalogItem'
 
+
 function Katalog() {
+
+  
   return (
     <section className="index-katalog">
-        <TitleRow mainTitle="Каталог игр" buttonTitle="Все игры" buttonUrl="#"/>
+        <TitleRow mainTitle="Каталог игр" buttonTitle="Все игры" buttonUrl="/catalog"/>
         <div className="flex">
           <KatalogItem 
             gameUrl="/"

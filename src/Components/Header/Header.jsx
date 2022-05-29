@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import Currency from "../Common/Currency"
 import Language from "../Common/Language"
@@ -9,7 +10,7 @@ function Header() {
     const navbar = [
         {
             title: "Товары",
-            linkUrl: ""
+            linkUrl: "/catalog"
         },
         {
             title: "Рулетка",
@@ -32,7 +33,7 @@ function Header() {
                     <input type="checkbox" id="menu-bar" />
                     <label className="main-menu-btn-icon" htmlFor="menu-bar" onClick={()=>setActiveMenu(!activeMenu)}/> 
                 </div>
-                <button className="header__logo">
+                <Link to="/" className="header__logo">
                     <svg width="54" height="57" viewBox="0 0 54 57" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M29.9777 2.2704C19.4858 5.67502 18.6694 14.3308 19.7778 16.2216L27.3025 16.3404C24.6506 11.8464 26.2952 5.53607 29.9777 2.2704Z" fill="#DD0000" />
                     <path d="M32.828 4.67486C26.5465 7.9786 27.3446 14.879 28.2471 16.1527C30.1263 16.6003 32.6667 16.2788 33.702 16.0621C31.5442 13.0339 32.4558 7.1409 32.828 4.67486Z" fill="#3D0A66" />
@@ -47,7 +48,7 @@ function Header() {
                     <path d="M34.2492 56.1482C34.2476 52.9406 34.0219 51.588 33.0841 48.8128C33.0841 48.8128 34.6297 48.3057 35.2568 47.9922C35.8839 47.6786 37.4345 46.7806 37.4345 46.7806C37.6273 47.9824 38.3138 53.3558 34.2492 56.1482Z" fill="#DD0000" />
                     </svg>
                     <div className="header__logo-txt">Game Monster</div>
-                </button>
+                </Link>
                 <div className={activeMenu ? "header__mobile" : "header__middle"} >
                     <Language />
                     <div className="header__menu">
@@ -57,7 +58,7 @@ function Header() {
                                     navbar.map(
                                         ( obj,index ) => 
                                             <li key={index}>
-                                                <button href={obj.linkUrl}>{obj.title}</button>
+                                                <Link to={obj.linkUrl}>{obj.title}</Link>
                                             </li>
                                     )
                                 }
@@ -71,6 +72,7 @@ function Header() {
                             </ul>
                         </nav>
                     </div>
+                    {/*
                     <div className="header__search">
                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="7.66665" cy="8.08022" r="6.66665" stroke="#7C7C7C" strokeWidth="2" />
@@ -78,6 +80,7 @@ function Header() {
                         </svg>
                         <input type="text" placeholder="Поиск" />
                     </div>
+                    */}
                     <Currency />
                 </div>
                 <div className="header__authorization flex">
