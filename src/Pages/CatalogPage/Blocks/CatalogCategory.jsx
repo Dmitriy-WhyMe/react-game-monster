@@ -4,7 +4,7 @@ const CatalogCategory = ({value,onChangeCategory}) => {
   const categories = [
     {
         title: "Все",
-        linkImg: "img/genre/image.png"
+        linkImg: "img/genre/games.jpg"
     },
     {
         title: "Экшены",
@@ -24,11 +24,11 @@ const CatalogCategory = ({value,onChangeCategory}) => {
     },
     {
       title: "Гонки",
-      linkImg: "img/genre/Mask Group (1).png"
+      linkImg: "img/genre/1558604195_grid_gt_day_2.jpg"
     },
     {
       title: "Спортивные",
-      linkImg: "img/genre/Layer 1 copy 2.png"
+      linkImg: "img/genre/1-9604d38a65901baa.jpg"
     },
   ]
   return (
@@ -36,7 +36,7 @@ const CatalogCategory = ({value,onChangeCategory}) => {
       {
         categories.map(
             ( obj,index ) => 
-                <button key={index}>
+                <button onClick={()=>onChangeCategory(index)} key={index} className={value === index ? 'active' : ''}>
                   <img src={obj.linkImg} alt=""/>
                   <div className="genre__title">{obj.title}</div>
                 </button>

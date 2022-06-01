@@ -11,7 +11,7 @@
         gap: 8px
         +mq($max-width: 374px)
             gap: 5px
-    &__all
+    &__popular
         height: 36px
         font-weight: 400
         font-size: 14px
@@ -23,10 +23,14 @@
         border-radius: 37px
         display: flex
         align-items: center
+        position: relative
         +mq($max-width: 374px)
             font-size: 12px
             padding-left: 12px
             padding-right: 12px
+        span
+            color: #F59502
+            font-weight: 700
         input
             display: none
         label
@@ -34,6 +38,29 @@
             display: flex
             align-items: center
             gap: 8px
+        .modal-popular
+            position: absolute
+            z-index: 10
+            left: 0
+            top: 40px
+            border-radius: 10px
+            width: 100%
+            padding: 8px 16px
+            background: #000000
+            border: 1px solid #313131
+            box-shadow: 0px 4px 23px -4px rgba(0, 0, 0, 0.2)
+            border-radius: 17px
+            li
+                font-weight: 400
+                font-size: 16px
+                line-height: 176.19%
+                color: white
+                cursor: pointer
+                &:hover
+                    color: #F59502
+            li.active
+                font-weight: 700
+                color: #F59502
     &__system
         height: 36px
         font-weight: 400
@@ -46,10 +73,14 @@
         border-radius: 37px
         display: flex
         align-items: center
+        position: relative
         +mq($max-width: 374px)
             font-size: 12px
             padding-left: 12px
             padding-right: 12px
+        span
+            color: #F59502
+            font-weight: 700
         input
             display: none
         label
@@ -57,6 +88,29 @@
             display: flex
             align-items: center
             gap: 8px
+        .modal-platform
+            position: absolute
+            z-index: 10
+            left: 0
+            top: 40px
+            border-radius: 10px
+            width: 100%
+            padding: 8px 16px
+            background: #000000
+            border: 1px solid #313131
+            box-shadow: 0px 4px 23px -4px rgba(0, 0, 0, 0.2)
+            border-radius: 17px
+            li
+                font-weight: 400
+                font-size: 16px
+                line-height: 176.19%
+                color: white
+                cursor: pointer
+                &:hover
+                    color: #F59502
+            li.active
+                font-weight: 700
+                color: #F59502
     &__price
         height: 36px
         font-weight: 400
@@ -69,10 +123,14 @@
         border-radius: 37px
         display: flex
         align-items: center
+        position: relative
         +mq($max-width: 374px)
             font-size: 12px
             padding-left: 12px
             padding-right: 12px
+        span
+            color: #F59502
+            font-weight: 700
         input
             display: none
         label
@@ -80,6 +138,29 @@
             display: flex
             align-items: center
             gap: 8px
+        .modal-price
+            position: absolute
+            z-index: 10
+            left: 0
+            top: 40px
+            border-radius: 10px
+            width: 100%
+            padding: 8px 16px
+            background: #000000
+            border: 1px solid #313131
+            box-shadow: 0px 4px 23px -4px rgba(0, 0, 0, 0.2)
+            border-radius: 17px
+            li
+                font-weight: 400
+                font-size: 16px
+                line-height: 176.19%
+                color: white
+                cursor: pointer
+                &:hover
+                    color: #F59502
+            li.active
+                font-weight: 700
+                color: #F59502
     &__search
         position: relative
         max-width: 339px
