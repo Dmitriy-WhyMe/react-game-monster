@@ -1,5 +1,5 @@
 //SECTION index-katalog 
-.index-katalog 
+.index-katalog
 	margin-top: 55px
 	+mq($max-width: 1279px)
 		margin-top: 20px
@@ -42,7 +42,7 @@
 				transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)
 				+mq($max-width: 1679px)
 					max-width: 320px
-					width: 100%	
+					width: 100%
 					clip-path: path('M12.8 0C5.73077 0 0 5.57032 0 12.4416V245.558C0 252.43 5.73074 258 12.8 258H202.489C209.558 258 215.289 252.43 215.289 245.558V209.05C215.289 198.556 223.795 190.05 234.289 190.05H307.2C314.269 190.05 320 184.479 320 177.608V12.4416C320 5.57032 314.269 0 307.2 0H12.8Z')
 				+mq($max-width: 1367px)
 					max-width: 304px
@@ -74,8 +74,7 @@
 			display: flex
 			align-items: center
 			gap: 7px
-			.katalog__info-main
-				background: #B602F5
+			.katalog__info
 				border-radius: 8px
 				height: 31px
 				display: flex
@@ -84,16 +83,9 @@
 				font-weight: 400
 				font-size: 14px
 				line-height: 125.69%
-			.katalog__info-dop
 				background: #000000
-				border-radius: 8px
-				height: 31px
-				display: flex
-				align-items: center
-				padding: 0 10px
-				font-weight: 400
-				font-size: 14px
-				line-height: 125.69%
+				&:first-child
+					background: #B602F5
 		.katalog__price
 			position: absolute
 			right: 15px
@@ -178,7 +170,7 @@
 			display: flex
 			align-items: center
 			gap: 10px
-			
+
 			&-item
 				background: #1C1C1C
 				border-radius: 4px

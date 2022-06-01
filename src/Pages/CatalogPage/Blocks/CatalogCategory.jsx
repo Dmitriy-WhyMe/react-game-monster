@@ -1,36 +1,47 @@
 import React from 'react'
 
-const CatalogCategory = () => {
+const CatalogCategory = ({value,onChangeCategory}) => {
+  const categories = [
+    {
+        title: "Все",
+        linkImg: "img/genre/image.png"
+    },
+    {
+        title: "Экшены",
+        linkImg: "img/genre/Mask Group (1).png"
+    },
+    {
+        title: "Шутеры",
+        linkImg: "img/genre/Layer 1 copy 2.png"
+    },
+    {
+      title: "Приключения",
+      linkImg: "img/genre/Mask Group.png"
+    },
+    {
+      title: "Стратегии",
+      linkImg: "img/genre/image.png"
+    },
+    {
+      title: "Гонки",
+      linkImg: "img/genre/Mask Group (1).png"
+    },
+    {
+      title: "Спортивные",
+      linkImg: "img/genre/Layer 1 copy 2.png"
+    },
+  ]
   return (
     <section className="genre">
-        <button>
-          <img src="img/genre/Mask Group (1).png" alt=""/>
-          <div className="genre__title">Экшены</div>
-        </button>
-        <button>
-          <img src="img/genre/Layer 1 copy 2.png" alt=""/>
-          <div className="genre__title">Шутеры</div>
-        </button>
-        <button>
-          <img src="img/genre/Mask Group.png" alt=""/>
-          <div className="genre__title">Приключения</div>
-        </button>
-        <button>
-          <img src="img/genre/image.png" alt=""/>
-          <div className="genre__title">Стратегии</div>
-        </button>
-        <button>
-          <img src="img/genre/Mask Group (1).png" alt=""/>
-          <div className="genre__title">Экшены</div>
-        </button>
-        <button>
-          <img src="img/genre/Layer 1 copy 2.png" alt=""/>
-          <div className="genre__title">Шутеры</div>
-        </button>
-        <button>
-          <img src="img/genre/Mask Group.png" alt=""/>
-          <div className="genre__title">Приключения</div>
-        </button>
+      {
+        categories.map(
+            ( obj,index ) => 
+                <button key={index}>
+                  <img src={obj.linkImg} alt=""/>
+                  <div className="genre__title">{obj.title}</div>
+                </button>
+        )
+      }
     </section>
   )
 }
