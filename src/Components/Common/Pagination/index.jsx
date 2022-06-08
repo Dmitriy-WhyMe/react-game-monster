@@ -1,19 +1,18 @@
-import React from 'react'
+import ReactPaginate from 'react-paginate';
+import style from './Pagination.module.sass'
 
-const index = () => {
+const index = ({onChangePage}) => {
   return (
-    <section className="pagination">
-        <button className="pagination__start">В начало</button>
-        <div className="flex">
-            <button className="active">1</button>
-            <button>2</button>
-            <button>3</button>
-            <button>4</button>
-            <div className="pagination__cirlce">...</div>
-            <button href="#">30</button>
-        </div>
-        <button className="pagination__end">В конец</button>
-    </section>
+    <ReactPaginate
+      className={style.pagination}
+      breakLabel="..."
+      nextLabel="Следующая"
+      onPageChange={(event) => onChangePage(event.selected + 1)}
+      pageRangeDisplayed={8}
+      pageCount={2}
+      previousLabel="Предыдущая"
+      renderOnZeroPageCount={null}
+    />
   )
 }
 

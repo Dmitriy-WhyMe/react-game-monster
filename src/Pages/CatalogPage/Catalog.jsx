@@ -8,6 +8,7 @@ import Pagination from '../../Components/Common/Pagination'
 const Catalog = () => {
     const [searchValue, setSearchValue] = React.useState('')
     const [isLoading, setIsLoading] = React.useState(true)
+    const [currentPage, setCurrentPage] = React.useState(1)
     const [games, setGames] = React.useState([])
     const [categoryId, setCategoryId] = React.useState(0)
 
@@ -27,7 +28,7 @@ const Catalog = () => {
         const order = sortPopularType.sortPopularProperty.includes('-') ? 'acs' : 'desc' && sortPriceType.sortPriceProperty.includes('-') ? 'acs' : 'desc'
         
         fetch(`
-            https://6297004814e756fe3b26c094.mockapi.io/Games?${category}${search}&sortBy=${sortBy}&order=${order}
+            https://6297004814e756fe3b26c094.mockapi.io/Games?page=${currentPage}&limit=8&${category}${search}&sortBy=${sortBy}&order=${order}
         `)
         .then((res) => res.json()) 
         .then(arr => {
@@ -36,7 +37,7 @@ const Catalog = () => {
         })
         window.scrollTo(0, 0)
 
-    }, [categoryId, sortPopularType, sortPriceType, searchValue])
+    }, [categoryId, sortPopularType, sortPriceType, searchValue, currentPage])
 
     const gamesArray = games.map(obj => <KatalogItem key={obj.id} {...obj}/>)
     const skeleton = [...new Array(12)].map((_, index) => <Skeleton key={index}/>)
@@ -58,7 +59,7 @@ const Catalog = () => {
                     {isLoading ? skeleton : gamesArray}
                 </div>
             </section>
-            <Pagination />
+            <Pagination onChangePage={number => setCurrentPage(number)}/>
         </div>
     )
 }
