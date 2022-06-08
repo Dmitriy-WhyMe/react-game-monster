@@ -1,10 +1,12 @@
 import React from 'react'
 import KatalogItem from '../../Components/Katalog/KatalogItem'
+import Skeleton from '../../Components/Katalog/Skeleton'
 import CatalogCategory from './Blocks/CatalogCategory'
 import CatalogFilters from './Blocks/CatalogFilters'
 import Pagination from '../../Components/Common/Pagination'
 
 const Catalog = () => {
+    const [isLoading, setIsLoading] = React.useState(true)
     const [games, setGames] = React.useState([])
     const [categoryId, setCategoryId] = React.useState(0)
 
@@ -39,7 +41,9 @@ const Catalog = () => {
         .then((res) => res.json()) 
         .then(arr => {
             setGames(arr)
+            setIsLoading(false)
         })
+        window.scrollTo(0, 0)
 
     }, [categoryId, filterType, sortPopularType, sortPriceType])
 
@@ -59,10 +63,9 @@ const Catalog = () => {
             />
             <section className="index-katalog">
                 <div className="flex">
-                    {
-                        games.map((obj) => (
-                            <KatalogItem key={obj.id} {...obj}/>
-                        ))
+                    {isLoading
+                        ? [...new Array(12)].map((_, index) => <Skeleton key={index}/>) 
+                        : games.map(obj => <KatalogItem key={obj.id} {...obj}/>)
                     }
                 </div>
             </section>
