@@ -6,6 +6,7 @@ import CatalogFilters from './Blocks/CatalogFilters'
 import Pagination from '../../Components/Common/Pagination'
 
 const Catalog = () => {
+    const [searchValue, setSearchValue] = React.useState('')
     const [isLoading, setIsLoading] = React.useState(true)
     const [games, setGames] = React.useState([])
     const [categoryId, setCategoryId] = React.useState(0)
@@ -14,30 +15,20 @@ const Catalog = () => {
         name: 'Desk',
         sortPopularProperty: 'rating',
     })
-
     const [sortPriceType, setSortPriceType] = React.useState({
         name: 'Desk',
         sortPriceProperty: 'priceMain',
     })
-
-    const [filterType, setFilterType] = React.useState({
-        name: 'Все',
-        filterPriceProperty: 'Все',
-    })
-
     React.useEffect(() => {
 
         const category = categoryId > 0 ? `categoryId=${categoryId}`: ''
-
+        const search = searchValue ? `&search=${searchValue}`: ''
         const sortBy = sortPopularType.sortPopularProperty.replace('-','') && sortPriceType.sortPriceProperty.replace('-','')
         const order = sortPopularType.sortPopularProperty.includes('-') ? 'acs' : 'desc' && sortPriceType.sortPriceProperty.includes('-') ? 'acs' : 'desc'
-        const filter = filterType.filterPriceProperty
         
-        //const sortByPrice = sortPriceType.sortPriceProperty.replace('-','')
-        //const orderPrice = sortPriceType.sortPriceProperty.includes('-') ? 'acs' : 'desc'
-
-        
-        fetch(`https://6297004814e756fe3b26c094.mockapi.io/Games?${category}&platform=${filter}&sortBy=${sortBy}&order=${order}`)
+        fetch(`
+            https://6297004814e756fe3b26c094.mockapi.io/Games?${category}${search}&sortBy=${sortBy}&order=${order}
+        `)
         .then((res) => res.json()) 
         .then(arr => {
             setGames(arr)
@@ -45,9 +36,10 @@ const Catalog = () => {
         })
         window.scrollTo(0, 0)
 
-    }, [categoryId, filterType, sortPopularType, sortPriceType])
+    }, [categoryId, sortPopularType, sortPriceType, searchValue])
 
-    
+    const gamesArray = games.map(obj => <KatalogItem key={obj.id} {...obj}/>)
+    const skeleton = [...new Array(12)].map((_, index) => <Skeleton key={index}/>)
 
     return (
         <div className="container">
@@ -56,17 +48,14 @@ const Catalog = () => {
             <CatalogFilters 
                 valuePopular={sortPopularType} 
                 onChangeSortPopular={(index)=>setSortPopularType(index)}
-                valuePlatform={filterType} 
-                onChangeFilterPrice={(index)=>setFilterType(index)}
                 valuePrice={sortPriceType} 
                 onChangeSortPrice={(index)=>setSortPriceType(index)}
+                searchValue={searchValue}
+                setSearchValue={setSearchValue}
             />
             <section className="index-katalog">
                 <div className="flex">
-                    {isLoading
-                        ? [...new Array(12)].map((_, index) => <Skeleton key={index}/>) 
-                        : games.map(obj => <KatalogItem key={obj.id} {...obj}/>)
-                    }
+                    {isLoading ? skeleton : gamesArray}
                 </div>
             </section>
             <Pagination />
