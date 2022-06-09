@@ -1,32 +1,29 @@
 import React from 'react'
 import Search from '../../../Components/Common/Search'
+import { useSelector, useDispatch  } from 'react-redux'
+import { setSortPopular, setSortPrice } from '../../../redux/slices/filterSlice'
 
-const CatalogFilters = ({
-  valuePopular, 
-  onChangeSortPopular,
-  valuePrice,
-  onChangeSortPrice,
-  searchValue,
-  setSearchValue
-}) => {
+const CatalogFilters = () => {
+  const dispatch = useDispatch()
+  const { sortPopular, sortPrice } = useSelector(state => state.filter)
 
   const [openPopular, setOpenPopular] = React.useState(false)
   const listPopular = [
-    {name: 'Desk', sortPopularProperty: 'rating'}, 
-    {name: 'Asc', sortPopularProperty: '-rating'}, 
+    {name: 'Desk', sortProperty: 'rating'}, 
+    {name: 'Asc', sortProperty: '-rating'}, 
   ]
-  const onClickListPopular = (i) => {
-    onChangeSortPopular(i)
+  const onClickListPopular = (obj) => {
+    dispatch(setSortPopular(obj))
     setOpenPopular(false)
   }
 
   const [openPrice, setOpenPrice] = React.useState(false)
   const listPrice = [
-    {name: 'Desk', sortPriceProperty: 'priceMain'}, 
-    {name: 'Asc', sortPriceProperty: '-priceMain'}, 
+    {name: 'Desk', sortProperty: 'priceMain'}, 
+    {name: 'Asc', sortProperty: '-priceMain'}, 
   ]
-  const onClickListPrice = (i) => {
-    onChangeSortPrice(i)
+  const onClickListPrice = (obj) => {
+    dispatch(setSortPrice(obj))
     setOpenPrice(false)
   }
 
@@ -35,7 +32,7 @@ const CatalogFilters = ({
         <div className="catalog-filters__item">
           <div className="catalog-filters__popular">
             <input type="checkbox" id="catalog-filters__popular"/>
-            <label htmlFor="catalog-filters__popular">По популярности:<span onClick={() => setOpenPopular(!openPopular)}>{valuePopular.name}</span><svg width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <label htmlFor="catalog-filters__popular">По популярности:<span onClick={() => setOpenPopular(!openPopular)}>{sortPopular.name}</span><svg width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M1 1L4 4L7 1" stroke="#C4C4C4" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </label>
@@ -45,7 +42,7 @@ const CatalogFilters = ({
                   <ul>
                     {
                       listPopular.map((obj, i)=>(
-                        <li onClick={() => onClickListPopular(obj)} key={i} className={valuePopular.sortPopularProperty === obj.sortPopularProperty ? 'active' : ''}>{obj.name}</li>
+                        <li onClick={() => onClickListPopular(obj)} key={i} className={sortPopular.sortProperty === obj.sortProperty ? 'active' : ''}>{obj.name}</li>
                       ))
                     }
                   </ul>
@@ -55,7 +52,7 @@ const CatalogFilters = ({
           </div>
           <div className="catalog-filters__price">
             <input type="checkbox" id="catalog-filters__price"/>
-            <label htmlFor="catalog-filters__price">Цена:<span onClick={() => setOpenPrice(!openPrice)}>{valuePrice.name}</span><svg width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <label htmlFor="catalog-filters__price">Цена:<span onClick={() => setOpenPrice(!openPrice)}>{sortPrice.name}</span><svg width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M1 1L4 4L7 1" stroke="#C4C4C4" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </label>
@@ -65,7 +62,7 @@ const CatalogFilters = ({
                   <ul>
                     {
                       listPrice.map((obj, i)=>(
-                        <li onClick={() => onClickListPrice(obj)} key={i} className={valuePrice.sortPriceProperty === obj.sortPriceProperty ? 'active' : ''}>{obj.name}</li>
+                        <li onClick={() => onClickListPrice(obj)} key={i} className={sortPrice.sortProperty === obj.sortProperty ? 'active' : ''}>{obj.name}</li>
                       ))
                     }
                   </ul>
@@ -74,7 +71,7 @@ const CatalogFilters = ({
             }
           </div>
         </div>
-        <Search searchValue={searchValue} setSearchValue={setSearchValue}/>
+        <Search/>
     </section>
   )
 }

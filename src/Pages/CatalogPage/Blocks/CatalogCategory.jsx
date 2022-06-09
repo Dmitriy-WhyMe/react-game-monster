@@ -1,6 +1,7 @@
-import React from 'react'
+import { setCategoryId } from '../../../redux/slices/filterSlice'
+import { useDispatch  } from 'react-redux'
 
-const CatalogCategory = ({value,onChangeCategory}) => {
+const CatalogCategory = ({value}) => {
   const categories = [
     {
         title: "Все",
@@ -31,6 +32,10 @@ const CatalogCategory = ({value,onChangeCategory}) => {
       linkImg: "img/genre/1-9604d38a65901baa.jpg"
     },
   ]
+  const dispatch = useDispatch()
+  const onChangeCategory = (id) => {
+      dispatch(setCategoryId(id))
+  }
   return (
     <section className="genre">
       {
