@@ -2,7 +2,6 @@ import ReactPaginate from 'react-paginate';
 import style from './Pagination.module.sass'
 
 const index = ({onChangePage, currentPage, countPage}) => {
-  console.log(countPage)
   return (
     <ReactPaginate
       className={style.pagination}

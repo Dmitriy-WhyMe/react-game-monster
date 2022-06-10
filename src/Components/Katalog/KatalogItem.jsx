@@ -1,8 +1,9 @@
-import React from 'react'
+import {useNavigate} from 'react-router-dom';
 
-const KatalogItem = ({imageUrl, title, priceMain, priceOld, category, info}) => {
+const KatalogItem = ({imageUrl, title, priceMain, priceOld, category, info, id}) => {
+    const router = useNavigate()
     return (
-        <button className="katalog__item" href="/">
+        <button className="katalog__item" onClick={() => router(`/catalog/game/${id}`)}>
             <img src={imageUrl} alt=""/>
             <div className="katalog__infos">
                 {

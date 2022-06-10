@@ -31,6 +31,8 @@
                 max-width: 117px
                 width: 100%
     &__info
+        max-width: 610px
+        width: 100%
         +mq($max-width: 1279px)
             display: flex
             flex-wrap: wrap
@@ -59,7 +61,7 @@
             flex-wrap: wrap
             gap: 10px
             justify-content: center
-        a
+        button
             max-width: fit-content
             height: 27px
             background: #1C1C1C
@@ -113,7 +115,7 @@
             justify-content: center
         +mq($max-width: 359px)
             flex-direction: column
-        a
+        button
             max-width: fit-content
             border-radius: 6px
             height: 48px
@@ -172,7 +174,7 @@
             line-height: 184%
             +mq($max-width: 1279px)
                 max-width: 100%
-            a
+            button
                 color: #F59502
     &__acount
         max-width: 610px
@@ -183,7 +185,7 @@
             max-width: 550px
         +mq($max-width: 1279px)
             max-width: 100%
-        
+
     &__header
         background: #2B2B2B
         border-radius: 13px
@@ -230,7 +232,7 @@
         &-left
             display: flex
             flex-direction: column
-            a
+            button
                 font-weight: 400
                 font-size: 19px
                 line-height: 190.19%
@@ -247,7 +249,3 @@
             color: #F59502
             +mq($max-width: 359px)
                 font-size: 16px
-            
-
-
-
