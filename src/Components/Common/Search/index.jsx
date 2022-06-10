@@ -1,14 +1,27 @@
-import { useSelector, useDispatch  } from 'react-redux'
+import React from 'react'
+import { useDispatch  } from 'react-redux'
 import { setSearchValue } from '../../../redux/slices/searchSlice'
+import debounce from 'lodash.debounce'
 
 const Search = () => {
-    const { searchValue } = useSelector(state => state.search)
+    const [value, setValue] = React.useState('')
     const dispatch = useDispatch()
+    // eslint-disable-next-line 
+    const updateSearchValue = React.useCallback(
+        debounce((str) => {
+            dispatch(setSearchValue(str))
+        }, 300),
+        [],
+    );
+    const onChangeInput = (event) => {
+        setValue(event.target.value);
+        updateSearchValue(event.target.value);
+    };
     return (
         <div className="catalog-filters__search">
             <input
-                value={searchValue}
-                onChange={(e) => dispatch(setSearchValue(e.target.value))}
+                value={value}
+                onChange={onChangeInput}
                 placeholder='Поиск среди игр'/>
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="7.66665" cy="7.99819" r="6.66665" stroke="#F59502" strokeWidth="2" />

@@ -9,7 +9,7 @@ const CatalogFilters = () => {
 
   const [openPopular, setOpenPopular] = React.useState(false)
   const listPopular = [
-    {name: 'Desk', sortProperty: 'rating'}, 
+    {name: 'Desk', sortProperty: 'rating'},
     {name: 'Asc', sortProperty: '-rating'}, 
   ]
   const onClickListPopular = (obj) => {
