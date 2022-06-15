@@ -7,6 +7,7 @@ import Catalog from './Pages/CatalogPage/Catalog';
 import Game from './Pages/GamePage';
 import NotFound from './Pages/NotFound';
 import Case from './Pages/CasePage'
+import Cart from './Pages/CartPage'
 
 import { useSelector  } from 'react-redux'
 
@@ -24,6 +25,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />}/>
           <Route path='/catalog' element={<Catalog />}/>
+          <Route path='/cart' element={<Cart />}/>
           <Route path='/catalog/game/:id' element={<Game />}/>
           <Route path={slugValue} element={<Case gamesArray={gamesArray} caseTitle={caseTitle}/>}/>
           <Route path='*' element={<NotFound />}/>

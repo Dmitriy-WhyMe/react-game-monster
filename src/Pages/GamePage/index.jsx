@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import GameSlider from './Blocks/GameSlider'
 import GameRelated from './Blocks/GameRelated'
+import { useDispatch  } from 'react-redux'
+import { addItem } from '../../redux/slices/cartSlice'
 
 const Index = () => {
     const [gameData, setGameData] = React.useState([])
@@ -18,6 +20,18 @@ const Index = () => {
             setIsLoading(false)
         })
     }, [params.id])
+
+    const dispatch = useDispatch()
+    const onClickAdd = () => {
+        const item = {
+            id: gameData.id,
+            title: gameData.title,
+            price: gameData.priceMain,
+            imageUrl: gameData.imageUrl,
+        }
+        dispatch(addItem(item))
+    }
+
   return (
     <div className="container card">
       <div className="card__block-top">
@@ -37,7 +51,7 @@ const Index = () => {
             </div>
           </div>
           <div className="card__btns">
-            <button className="btn card__buy">Купить ключ</button>
+            <button onClick={onClickAdd} className="btn card__buy">Купить ключ</button>
             <button className="btn card__random">Выбить в рандоме</button>
           </div>
           <div className="card__description">
