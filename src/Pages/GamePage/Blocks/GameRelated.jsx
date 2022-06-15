@@ -25,6 +25,7 @@ const GameRelated = (categoryGameId) => {
             imageUrl={`../../${obj.imageUrl}`}
         />)
     const skeleton = [...new Array(4)].map((_, index) => <Skeleton key={index}/>)
+    
     return (
         <section className="index-katalog">
             <TitleRow mainTitle="Похожие игры" buttonTitle="Все игры" buttonUrl="/catalog"/>

@@ -43,12 +43,12 @@ const Index = () => {
           <div className="card__description">
             <div className="card__description-item">
               <div className="card__description-left">Дата выпуска</div>
-              <div className="card__description-right">12 августа 2012</div>
+              <div className="card__description-right">{gameData.date}</div>
             </div>
             <div className="card__description-item">
               <div className="card__description-left">Разработчик</div>
               <div className="card__description-right">
-                <span>Valve</span>
+                <span>{gameData.developer}</span>
               </div>
             </div>
             <div className="card__description-item">
@@ -65,8 +65,7 @@ const Index = () => {
         </div>
       </div>
       <div className="card__block-bottom">
-        <p>Counter-Strike: Global Offensive является трёхмерным многопользовательским шутером от первого лица, в котором игроки распределяются по двум командам и сражаются друг с другом. В игре представлены две команды: террористы и спецназ, а также два сценария игры: разминирование бомбы и спасение залож игроки распределяются по двум командам и сражаются друг с другом. В игре представлены две команды: террористы и спецназ, а также два сценария игры: разминирование бомбы <button>подробнее..</button>
-        </p>
+        <p>{gameData.description}</p>
         <div className="card__acount">
           <div className="card__header">
             <div className="card__header-left">

@@ -1,53 +1,36 @@
-import React from 'react'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 import FortuneItem from '../../../Components/Fortune/FortuneItem'
 
 function Fortune() {
+  const [cases, setCases] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+  useEffect(() => {
+    axios.get(`https://6297004814e756fe3b26c094.mockapi.io/Cases?`).then(res => {
+        setCases(res.data)
+        setIsLoading(false)
+    })
+  }, [])
   return (
     <section className="fortune">
         <h3 className="title-block">Испытай удачу</h3>
         <div className="flex">
-          <FortuneItem 
-            dataAos="zoom-in"
-            dataAosDuration="500"
-            mainImageUrl="img/fortune/Union.png"
-            absolutImageUrl="img/fortune/Mask Group (2).png"
-            absolutImageClass="fortune__absolute-1"
-            title="EPIC"
-            titleClass="fortune__title-1"
-            countGame="800"
-            profitCase="130%"
-            startPrice="900"
-            priceMain="500"
-            priceOld="900"
-          />
-          <FortuneItem 
-            dataAos="zoom-in"
-            dataAosDuration="800"
-            mainImageUrl="img/fortune/Union (1).png"
-            absolutImageUrl="img/fortune/Mask Group (1).png"
-            absolutImageClass="fortune__absolute-2"
-            title="COMMON"
-            titleClass="fortune__title-2"
-            countGame="800"
-            profitCase="130%"
-            startPrice="900"
-            priceMain="400"
-            priceOld="900"
-          />
-          <FortuneItem 
-            dataAos="zoom-in"
-            dataAosDuration="1100"
-            mainImageUrl="img/fortune/Union (2).png"
-            absolutImageUrl="img/fortune/Mask Group.png"
-            absolutImageClass="fortune__absolute-3"
-            title="LEGEND"
-            titleClass="fortune__title-3"
-            countGame="800"
-            profitCase="130%"
-            startPrice="900"
-            priceMain="400"
-            priceOld="1200"
-          />
+          {isLoading === false
+            ? cases.map((value, index) =>
+              <FortuneItem
+                key={index}
+                slug={value.slug}
+                games={value.games}
+                title={value.title}
+                priceMain={value.priceMain}
+                priceOld={value.priceOld}
+                mainImageUrl={value.mainImageUrl}
+                absolutImageUrl={value.absolutImageUrl}
+                absolutImageClass={value.absolutImageClass}
+                titleClass={value.titleClass}
+              />)
+            : false
+          }
         </div>
       </section>
   )

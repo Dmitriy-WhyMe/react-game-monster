@@ -1,6 +1,6 @@
 import Bonuses from "./Blocks/Bonuses"
 import Fortune from "./Blocks/Fortune"
-import Katalog from "./Blocks/Katalog"
+import Katalog from "../../Components/Katalog"
 import NewsVariantOne from "../../Components/NewsVariants/NewsVariantOne"
 import HomeSlider from "./Blocks/HomeSlider"
 
@@ -10,7 +10,7 @@ function Home() {
     <div className="container">
       <HomeSlider />
       <Fortune />
-      <Katalog />
+      <Katalog countGames="8"/>
       <NewsVariantOne />
       <Bonuses />
     </div>
