@@ -1,68 +1,50 @@
 import React from 'react'
 import Search from '../../../Components/Common/Search'
 import { useSelector, useDispatch  } from 'react-redux'
-import { setSortPopular, setSortPrice } from '../../../redux/slices/filterSlice'
+import { setSort } from '../../../redux/slices/filterSlice'
 
 const CatalogFilters = () => {
   const dispatch = useDispatch()
-  const { sortPopular, sortPrice } = useSelector(state => state.filter)
-
-  const [openPopular, setOpenPopular] = React.useState(false)
-  const listPopular = [
-    {name: 'Desk', sortProperty: 'rating'},
-    {name: 'Asc', sortProperty: '-rating'}, 
+  const { sort } = useSelector(state => state.filter)
+  const [openSort, setOpenSort] = React.useState(false)
+  const sortRef = React.useRef()
+  const sortList = [
+    {name: 'Популярность Desk', sortProperty: 'rating'},
+    {name: 'Популярность Asc', sortProperty: '-rating'},
+    {name: 'Цена Desk', sortProperty: 'priceMain'}, 
+    {name: 'Цена Asc', sortProperty: '-priceMain'},
   ]
-  const onClickListPopular = (obj) => {
-    dispatch(setSortPopular(obj))
-    setOpenPopular(false)
+  const onClickListSort= (obj) => {
+    dispatch(setSort(obj))
+    setOpenSort(false)
   }
 
-  const [openPrice, setOpenPrice] = React.useState(false)
-  const listPrice = [
-    {name: 'Desk', sortProperty: 'priceMain'}, 
-    {name: 'Asc', sortProperty: '-priceMain'}, 
-  ]
-  const onClickListPrice = (obj) => {
-    dispatch(setSortPrice(obj))
-    setOpenPrice(false)
-  }
+  React.useEffect(() => {
+    const handleClickOutside = (event) => {
+        if(!event.path.includes(sortRef.current)){
+          setOpenSort(false)
+        }
+    }
+    document.body.addEventListener('click', handleClickOutside)
+    return () => document.body.removeEventListener('click', handleClickOutside)
+  }, [])
 
   return (
     <section className="catalog-filters">
         <div className="catalog-filters__item">
-          <div className="catalog-filters__popular">
+          <div ref={sortRef} className="catalog-filters__popular">
             <input type="checkbox" id="catalog-filters__popular"/>
-            <label htmlFor="catalog-filters__popular">По популярности:<span onClick={() => setOpenPopular(!openPopular)}>{sortPopular.name}</span><svg width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <label htmlFor="catalog-filters__popular">Сортировать по:<span onClick={() => setOpenSort(!openSort)}>{sort.name}</span><svg width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M1 1L4 4L7 1" stroke="#C4C4C4" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </label>
             {
-              openPopular && (
+              openSort && (
                 <div className="modal-popular">
                   <ul>
                     {
-                      listPopular.map((obj, i)=>(
-                        <li onClick={() => onClickListPopular(obj)} key={i} className={sortPopular.sortProperty === obj.sortProperty ? 'active' : ''}>{obj.name}</li>
-                      ))
-                    }
-                  </ul>
-                </div>
-              )
-            }
-          </div>
-          <div className="catalog-filters__price">
-            <input type="checkbox" id="catalog-filters__price"/>
-            <label htmlFor="catalog-filters__price">Цена:<span onClick={() => setOpenPrice(!openPrice)}>{sortPrice.name}</span><svg width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1 1L4 4L7 1" stroke="#C4C4C4" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </label>
-            {
-              openPrice && (
-                <div className="modal-price">
-                  <ul>
-                    {
-                      listPrice.map((obj, i)=>(
-                        <li onClick={() => onClickListPrice(obj)} key={i} className={sortPrice.sortProperty === obj.sortProperty ? 'active' : ''}>{obj.name}</li>
+                      sortList.map((obj, i)=>(
+                        <li onClick={() => onClickListSort(obj)} key={i} className={sort.sortProperty === obj.sortProperty ? 'active' : ''}>{obj.name}</li>
                       ))
                     }
                   </ul>

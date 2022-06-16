@@ -1,40 +1,38 @@
-import React from 'react'
-import axios from 'axios'
-
+import {useEffect} from 'react'
 import KatalogItem from '../../Components/Katalog/KatalogItem'
 import Skeleton from '../../Components/Katalog/Skeleton'
 import CatalogCategory from './Blocks/CatalogCategory'
 import CatalogFilters from './Blocks/CatalogFilters'
 import Pagination from '../../Components/Common/Pagination'
-
 import { setCurrentPage } from '../../redux/slices/filterSlice'
 import { useSelector, useDispatch  } from 'react-redux'
+import { fetchGames } from '../../redux/slices/catalogGameSlice'
 
 const Catalog = () => {
     const dispatch = useDispatch()
-    const [isLoading, setIsLoading] = React.useState(true)
-    const [games, setGames] = React.useState([])
     const { searchValue } = useSelector(state => state.search)
-    const { categoryId, sortPopular, sortPrice, currentPage } = useSelector(state => state.filter)
-
+    const { categoryId, sort, currentPage } = useSelector(state => state.filter)
+    const { games, status} = useSelector(state => state.catalogPage)
     const onChangePage = number => {
         dispatch(setCurrentPage(number))
     }
-
-    React.useEffect(() => {
+    const getGames = async () => {
         const category = categoryId > 0 ? `categoryId=${categoryId}`: ''
         const search = searchValue ? `&search=${searchValue}`: ''
-        const sortBy = sortPopular.sortProperty.replace('-','') && sortPrice.sortProperty.replace('-','')
-        const order = sortPopular.sortProperty.includes('-') ? 'acs' : 'desc' && sortPrice.sortProperty.includes('-') ? 'acs' : 'desc'
-        axios.get(`
-            https://6297004814e756fe3b26c094.mockapi.io/Games?page=${currentPage}&limit=8&${category}${search}&sortBy=${sortBy}&order=${order}
-        `).then(res => {
-            setGames(res.data)
-            setIsLoading(false)
-        })
+        const sortBy = sort.sortProperty.replace('-','')
+        const order = sort.sortProperty.includes('-') ? 'acs' : 'desc'
+        dispatch(fetchGames({
+            category:`&${category}`,
+            search,
+            sortBy:`&sortBy=${sortBy}`,
+            order:`&order=${order}`,
+            currentPage:`page=${currentPage}`
+        }))
         window.scrollTo(0, 0)
-    }, [categoryId, sortPopular, sortPrice, searchValue, currentPage])
-
+    }
+    useEffect(() => {
+        getGames()
+    }, [categoryId,sort.sortProperty,searchValue,currentPage])
     const gamesArray = games.map(obj => <KatalogItem key={obj.id} {...obj}/>)
     const skeleton = [...new Array(12)].map((_, index) => <Skeleton key={index}/>)
     return (
@@ -43,11 +41,12 @@ const Catalog = () => {
             <CatalogCategory value={categoryId}/>
             <CatalogFilters/>
             <section className="index-katalog">
-                <div className="flex">
-                    {isLoading ? skeleton : gamesArray}
-                </div>
+                {status === 'error'
+                    ? <div>Ошибка загрузки игр</div>
+                    : <div className="flex">{status === 'loading' ? skeleton : gamesArray}</div>
+                }
             </section>
-            <Pagination currentPage={currentPage} onChangePage={onChangePage} countPage={gamesArray.length }/>
+            <Pagination currentPage={currentPage} onChangePage={onChangePage} countPage={gamesArray.length}/>
         </div>
     )
 }
