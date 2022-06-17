@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import Currency from "../Common/Currency"
 import Language from "../Common/Language"
 import style from './Header.module.sass'
+import { selectCart } from '../../redux/slices/cartSlice'
 
 function Header() {
     const [activeMenu, setActiveMenu] = React.useState(false)
@@ -26,7 +27,7 @@ function Header() {
             linkUrl: "/"
         }
     ]
-    const { items, totalPrice } = useSelector(state => state.cart)
+    const { items, totalPrice } = useSelector(selectCart)
     const totalCount = items.reduce((sum, item) => sum + item.count, 0)
     return (
         <header className="header">

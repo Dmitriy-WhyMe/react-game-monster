@@ -1,11 +1,11 @@
 import React from 'react'
 import Search from '../../../Components/Common/Search'
 import { useSelector, useDispatch  } from 'react-redux'
-import { setSort } from '../../../redux/slices/filterSlice'
+import { selectFilter, setSort } from '../../../redux/slices/filterSlice'
 
 const CatalogFilters = () => {
   const dispatch = useDispatch()
-  const { sort } = useSelector(state => state.filter)
+  const { sort } = useSelector(selectFilter)
   const [openSort, setOpenSort] = React.useState(false)
   const sortRef = React.useRef()
   const sortList = [

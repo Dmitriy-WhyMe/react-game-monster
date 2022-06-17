@@ -17,17 +17,22 @@ header > .container
         gap: 17px
         margin-right: 41px
         +mq($max-width: 1365px)
-            margin-right: 25px
+            margin-right: 10px
         +mq($max-width: 1279px)
             margin-left: 64px
         +mq($max-width: 767px)
             margin-left: 40px
+        +mq($max-width: 359px)
+            gap: 5px
         &-txt
             font-weight: 700
             font-size: 18.43px
             line-height: 22px
             font-style: italic
             max-width: 77px
+            +mq($max-width: 359px)
+                font-size: 15px
+                line-height: 110%
     &__middle
         display: flex
         align-items: center
@@ -41,7 +46,7 @@ header > .container
         background: #161616
         border-radius: 21px
         flex-direction: column
-        max-width: 422px
+        max-width: 300px
         width: 100%
         padding: 23px
         align-items: baseline
@@ -61,10 +66,8 @@ header > .container
 
     &__menu
         +mq($max-width: 1279px)
-            margin-top: 64px
+            margin-top: 10px
             padding-left: 14px
-        +mq($max-width: 767px)
-            margin-top: 60px
     &__separator
         color: #7C7C7C
         ont-weight: 500
@@ -143,7 +146,6 @@ header > .container
         margin-right: 45px
     +mq($max-width: 1279px)
         max-width: 200px
-
     ul
         display: flex
         align-items: center

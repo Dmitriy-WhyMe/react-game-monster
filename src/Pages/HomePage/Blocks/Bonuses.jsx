@@ -1,5 +1,3 @@
-import React from 'react'
-
 function Bonuses() {
   return (
     <section className="bonuses">

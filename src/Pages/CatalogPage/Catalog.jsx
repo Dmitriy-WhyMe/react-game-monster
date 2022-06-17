@@ -4,15 +4,16 @@ import Skeleton from '../../Components/Katalog/Skeleton'
 import CatalogCategory from './Blocks/CatalogCategory'
 import CatalogFilters from './Blocks/CatalogFilters'
 import Pagination from '../../Components/Common/Pagination'
-import { setCurrentPage } from '../../redux/slices/filterSlice'
+import { selectFilter, setCurrentPage } from '../../redux/slices/filterSlice'
 import { useSelector, useDispatch  } from 'react-redux'
-import { fetchGames } from '../../redux/slices/catalogGameSlice'
+import { fetchGames, selectCatalogPage } from '../../redux/slices/catalogGameSlice'
+import { selectSearch } from '../../redux/slices/searchSlice'
 
 const Catalog = () => {
     const dispatch = useDispatch()
-    const { searchValue } = useSelector(state => state.search)
-    const { categoryId, sort, currentPage } = useSelector(state => state.filter)
-    const { games, status} = useSelector(state => state.catalogPage)
+    const { searchValue } = useSelector(selectSearch)
+    const { categoryId, sort, currentPage } = useSelector(selectFilter)
+    const { games, status } = useSelector(selectCatalogPage)
     const onChangePage = number => {
         dispatch(setCurrentPage(number))
     }
@@ -32,6 +33,7 @@ const Catalog = () => {
     }
     useEffect(() => {
         getGames()
+        // eslint-disable-next-line
     }, [categoryId,sort.sortProperty,searchValue,currentPage])
     const gamesArray = games.map(obj => <KatalogItem key={obj.id} {...obj}/>)
     const skeleton = [...new Array(12)].map((_, index) => <Skeleton key={index}/>)

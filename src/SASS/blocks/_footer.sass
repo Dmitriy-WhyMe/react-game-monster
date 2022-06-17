@@ -105,9 +105,14 @@
         ont-weight: 500
         font-size: 16px
         line-height: 125.69%
-    &__language
+    .language_language__K3tCd
         align-items: center
-        gap: 3px
+        gap: 12px
+        @media(max-width: 1365px)
+            margin-right: 0px
+            position: relative
+            top: inherit
+            right: inherit
         .footer__separator
             display: block
         button
@@ -115,8 +120,13 @@
             font-weight: 500
             font-size: 16px
             line-height: 125.69%
+            @media(max-width: 1279px)
+                font-size: 16px
         button.active
             color: white
+    .currency_currency__s-DNP button
+        @media(max-width: 1279px)
+            font-size: 16px
     &__authorization
         align-items: center
         gap: 3px
@@ -125,9 +135,14 @@
             font-weight: 500
             font-size: 16px
             line-height: 125.69%
-    &__currency
+    .currency_currency__s-DNP
         align-items: center
         gap: 8px
+        +mq($max-width: 1365px)
+            position: relative
+            margin-right: 0
+            top: inherit
+            right: inherit
         a
             color: #7C7C7C
             font-weight: 500

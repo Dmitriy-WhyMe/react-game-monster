@@ -1,13 +1,13 @@
 import style from './CartPage.module.sass'
 import { useDispatch, useSelector  } from 'react-redux'
-import { clearItems } from '../../redux/slices/cartSlice'
+import { clearItems, selectCart } from '../../redux/slices/cartSlice'
 import CartEmpty from '../../Components/CartEmpty'
 import CartItem from '../../Components/CartItem'
 import { Link } from "react-router-dom";
 
 const Index = () => {
     const dispatch = useDispatch()
-    const { totalPrice, items} = useSelector(state => state.cart)
+    const { totalPrice, items} = useSelector(selectCart)
     const onClickClear = () => {
         dispatch(clearItems())
     }
@@ -48,9 +48,6 @@ const Index = () => {
                 </div>
                 <div className={style.btns}>
                     <Link to="/" className={style.back}>
-                        <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M7 13L1 6.93015L6.86175 1" stroke="#D3D3D3" strokeWidth="1.5" strokeLinejoin="round"></path>
-                        </svg>
                         <span>Вернуться назад</span>
                     </Link>
                     <div className={style.pay}>

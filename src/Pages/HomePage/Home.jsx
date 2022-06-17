@@ -4,7 +4,6 @@ import Katalog from "../../Components/Katalog"
 import NewsVariantOne from "../../Components/NewsVariants/NewsVariantOne"
 import HomeSlider from "./Blocks/HomeSlider"
 
-
 function Home() {
   return (
     <div className="container">

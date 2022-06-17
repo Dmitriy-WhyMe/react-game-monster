@@ -39,6 +39,8 @@ const catalogGameSlice = createSlice({
     }
 })
 
+export const selectCatalogPage = (state) => state.catalogPage
+
 export const { setGames } = catalogGameSlice.actions
 
 export default catalogGameSlice.reducer
