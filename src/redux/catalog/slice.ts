@@ -1,25 +1,6 @@
 import axios from 'axios'
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
-import { RootState } from '../store'
-
-type Game = {
-    id: string, title: string, price: number, imageUrl: string 
-}
-
-export enum Status {
-    LOADING = 'loading',
-    SUCCESS = 'success',
-    ERORR = 'error'
-}
-
-interface CatalogGameSliceState {
-    games: Game[],
-    status: 'loading' | 'success' | 'error'
-}
-
-export type SearchGameParams = {
-    category: string, search: string, sortBy: string, order: string, currentPage: string
-}
+import { CatalogGameSliceState, Game, SearchGameParams, Status } from './types'
 
 export const fetchGames = createAsyncThunk(
     'catalogPage/fetchGamesStatus',
@@ -59,9 +40,5 @@ const catalogGameSlice = createSlice({
             })
     }
 })
-
-export const selectCatalogPage = (state: RootState) => state.catalogPage
-
 export const { setGames } = catalogGameSlice.actions
-
 export default catalogGameSlice.reducer

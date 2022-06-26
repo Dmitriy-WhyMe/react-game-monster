@@ -4,6 +4,7 @@ import FortuneItem from '../../../Components/Fortune/FortuneItem'
 import React from 'react'
 
 type Cases = {
+  id: string,
   key: string,
   slug: string
   games: []
@@ -30,18 +31,10 @@ const Fortune: React.FC = () => {
         <h3 className="title-block">Испытай удачу</h3>
         <div className="flex">
           {isLoading === false
-            ? cases.map((value, index) =>
+            ? cases.map((obj) =>
               <FortuneItem
-                key={index}
-                slug={value.slug}
-                games={value.games}
-                title={value.title}
-                priceMain={value.priceMain}
-                priceOld={value.priceOld}
-                mainImageUrl={value.mainImageUrl}
-                absolutImageUrl={value.absolutImageUrl}
-                absolutImageClass={value.absolutImageClass}
-                titleClass={value.titleClass}
+                {...obj}
+                key={obj.slug}
               />)
             : false
           }

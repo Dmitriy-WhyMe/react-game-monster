@@ -1,16 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { useDispatch } from 'react-redux'
-import filter from './slices/filterSlice'
-import search from './slices/searchSlice'
-import cases from './slices/casesSlice'
-import cart from './slices/cartSlice'
-import catalogPage from './slices/catalogGameSlice'
+import filter from './filter/slice'
+import search from './search/slice'
+import cart from './cart/slice'
+import catalogPage from './catalog/slice'
 
 export const store = configureStore({
     reducer: {
         filter,
         search,
-        cases,
         cart,
         catalogPage,
     }

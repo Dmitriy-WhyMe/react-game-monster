@@ -1,5 +1,4 @@
 import './SASS/style.sass'
-
 import Home from './Pages/HomePage/Home'
 import Catalog from './Pages/CatalogPage/Catalog';
 import Game from './Pages/GamePage';
@@ -9,9 +8,6 @@ import Cart from './Pages/CartPage'
 import MainLayout from './layouts/MainLayout';
 import FullScreenLayout from './layouts/FullScreenLayout';
 
-import { useSelector  } from 'react-redux'
-import { selectCases } from './redux/slices/casesSlice';
-
 import {
     Routes,
     Route,
@@ -19,7 +15,6 @@ import {
 
 
 function App() {
-  const { slugValue, gamesArray, caseTitle } = useSelector(selectCases)
   return (
     <Routes>
       <Route path='/' element={<MainLayout />}>
@@ -27,7 +22,7 @@ function App() {
         <Route path='/catalog' element={<Catalog />}/>
         <Route path='/cart' element={<Cart />}/>
         <Route path='/catalog/game/:id' element={<Game />}/>
-        <Route path={slugValue} element={<Case gamesArray={gamesArray} caseTitle={caseTitle}/>}/>
+        <Route path='/case/:id' element={<Case />}/>
       </Route>
       <Route path='*' element={<FullScreenLayout />}>
         <Route path='*' element={<NotFound />}/>

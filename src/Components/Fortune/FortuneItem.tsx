@@ -1,11 +1,8 @@
-import { useDispatch  } from 'react-redux'
-import { setSlugValue, setGamesArray, setCaseTitle } from '../../redux/slices/casesSlice'
 import { useNavigate } from 'react-router-dom';
 import React from 'react'
 
 type FortuneItemProps = {
-    slug: string,
-    games: [],
+    id: string,
     title: string,
     mainImageUrl: string,
     absolutImageClass: string,
@@ -15,17 +12,13 @@ type FortuneItemProps = {
     priceOld: number
 }
 
-const FortuneItem: React.FC<FortuneItemProps> = ({slug,games,title,mainImageUrl,absolutImageClass,absolutImageUrl,titleClass,priceMain,priceOld}) => {
+const FortuneItem: React.FC<FortuneItemProps> = ({id,title,mainImageUrl,absolutImageClass,absolutImageUrl,titleClass,priceMain,priceOld}) => {
     const router = useNavigate()
-    const dispatch = useDispatch()
-    const onChangeSlug = (slug: string, games: [], title: string) => {
-        dispatch(setSlugValue(slug))
-        dispatch(setGamesArray(games))
-        dispatch(setCaseTitle(title))
-        router(slug)
+    const onChangeSlug = (id: string) => {
+        router(`/case/${id}`)
     }
     return (
-        <div className="fortune__item" onClick={() => onChangeSlug(slug, games, title)}>
+        <div className="fortune__item" onClick={() => onChangeSlug(id)}>
             <img className="fortune__img" src={mainImageUrl} alt=""/>
             <img className={absolutImageClass} src={absolutImageUrl} alt=""/>
             <div className={titleClass}>{title}</div>

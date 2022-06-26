@@ -4,7 +4,7 @@ import axios from 'axios'
 import GameSlider from './Blocks/GameSlider'
 import GameRelated from './Blocks/GameRelated'
 import { useDispatch  } from 'react-redux'
-import { addItem } from '../../redux/slices/cartSlice'
+import { addItem } from '../../redux/cart/slice'
 
 type GameData = {
   id: string,

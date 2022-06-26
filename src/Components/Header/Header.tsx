@@ -1,12 +1,12 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import Currency from "../Common/Currency"
 import Language from "../Common/Language"
 import style from './Header.module.sass'
-import { selectCart } from '../../redux/slices/cartSlice'
+import { selectCart } from '../../redux/cart/selectors'
 
-function Header() {
+const Header: React.FC = () => {
     const [activeMenu, setActiveMenu] = React.useState(false)
 
     const navbar = [
@@ -29,6 +29,15 @@ function Header() {
     ]
     const { items, totalPrice } = useSelector(selectCart)
     const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0)
+    const isMounted = useRef(false)
+
+    React.useEffect(() => {
+        if(isMounted.current){
+          const json = JSON.stringify(items)
+          localStorage.setItem('cart', json)
+        }
+        isMounted.current = true
+      }, [items])
     return (
         <header className="header">
             <div className="container">

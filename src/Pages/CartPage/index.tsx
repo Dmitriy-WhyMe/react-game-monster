@@ -1,6 +1,7 @@
 import style from './CartPage.module.sass'
 import { useDispatch, useSelector  } from 'react-redux'
-import { clearItems, selectCart } from '../../redux/slices/cartSlice'
+import { clearItems } from '../../redux/cart/slice'
+import { selectCart } from '../../redux/cart/selectors'
 import CartEmpty from '../../Components/CartEmpty'
 import CartItem from '../../Components/CartItem'
 import { Link } from "react-router-dom";

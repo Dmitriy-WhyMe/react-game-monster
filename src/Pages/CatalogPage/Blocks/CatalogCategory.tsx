@@ -1,4 +1,4 @@
-import { setCategoryId } from '../../../redux/slices/filterSlice'
+import { setCategoryId } from '../../../redux/filter/slice'
 import { useDispatch  } from 'react-redux'
 import React from 'react'
 
@@ -6,7 +6,7 @@ type CatalogCategoryProps = {
   value: number
 }
 
-const CatalogCategory: React.FC<CatalogCategoryProps> = ({value}) => {
+const CatalogCategory: React.FC<CatalogCategoryProps> = React.memo(({value}) => {
   const categories = [
     {
         title: "Все",
@@ -54,6 +54,6 @@ const CatalogCategory: React.FC<CatalogCategoryProps> = ({value}) => {
       }
     </section>
   )
-}
+})
 
 export default CatalogCategory

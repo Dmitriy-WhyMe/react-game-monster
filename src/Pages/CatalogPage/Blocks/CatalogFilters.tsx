@@ -1,7 +1,9 @@
 import React from 'react'
 import Search from '../../../Components/Common/Search'
 import { useSelector, useDispatch  } from 'react-redux'
-import { selectFilter, setSort, sortPropertyEnum } from '../../../redux/slices/filterSlice'
+import { setSort } from '../../../redux/filter/slice'
+import { sortPropertyEnum } from '../../../redux/filter/types'
+import { selectFilter } from '../../../redux/filter/selectors'
 
 type FiltersItem = {
   name: string,

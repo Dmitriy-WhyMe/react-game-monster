@@ -78,9 +78,6 @@ function index() {
                 </div>
                 <Language />
                 <Currency />
-                <div className="footer__search">
-                    <input type="text" placeholder="Поиск по Game Monster"/>
-                </div>
             </div>
             <div className="footer__social">
                 <button >
