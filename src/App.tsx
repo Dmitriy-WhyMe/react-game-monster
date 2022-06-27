@@ -1,18 +1,15 @@
 import './SASS/style.sass'
 import Home from './Pages/HomePage/Home'
-import Catalog from './Pages/CatalogPage/Catalog';
-import Game from './Pages/GamePage';
-import NotFound from './Pages/NotFound';
-import Case from './Pages/CasePage'
-import Cart from './Pages/CartPage'
+import loadable from '@loadable/component'
 import MainLayout from './layouts/MainLayout';
 import FullScreenLayout from './layouts/FullScreenLayout';
+import { Routes, Route } from "react-router-dom";
 
-import {
-    Routes,
-    Route,
-  } from "react-router-dom";
-
+const Catalog = loadable(() => import('./Pages/CatalogPage/Catalog'))
+const Cart = loadable(() => import('./Pages/CartPage'))
+const Case = loadable(() => import('./Pages/CasePage'))
+const NotFound = loadable(() => import('./Pages/NotFound'))
+const Game = loadable(() => import('./Pages/GamePage'))
 
 function App() {
   return (

@@ -1,7 +1,8 @@
+import React from 'react'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import FortuneItem from '../../../Components/Fortune/FortuneItem'
-import React from 'react'
+import FortuneSkeleton from '../../../Components/Fortune/FortuneSkeleton'
 
 type Cases = {
   id: string,
@@ -31,12 +32,8 @@ const Fortune: React.FC = () => {
         <h3 className="title-block">Испытай удачу</h3>
         <div className="flex">
           {isLoading === false
-            ? cases.map((obj) =>
-              <FortuneItem
-                {...obj}
-                key={obj.slug}
-              />)
-            : false
+            ? cases.map((obj) => <FortuneItem {...obj} key={obj.slug} />)
+            : [...new Array(3)].map((_, index) => <FortuneSkeleton key={index}/>)
           }
         </div>
       </section>

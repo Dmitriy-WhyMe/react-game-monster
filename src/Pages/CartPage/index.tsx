@@ -5,6 +5,7 @@ import { selectCart } from '../../redux/cart/selectors'
 import CartEmpty from '../../Components/CartEmpty'
 import CartItem from '../../Components/CartItem'
 import { Link } from "react-router-dom";
+import { CartItemType } from '../../redux/cart/types'
 
 const Index = () => {
     const dispatch = useDispatch()
@@ -12,7 +13,7 @@ const Index = () => {
     const onClickClear = () => {
         dispatch(clearItems())
     }
-    const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0)
+    const totalCount = items.reduce((sum: number, item: CartItemType) => sum + item.count, 0)
     if(!totalPrice){
         return <CartEmpty />
     }

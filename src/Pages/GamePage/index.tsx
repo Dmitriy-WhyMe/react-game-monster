@@ -6,7 +6,7 @@ import GameRelated from './Blocks/GameRelated'
 import { useDispatch  } from 'react-redux'
 import { addItem } from '../../redux/cart/slice'
 
-type GameData = {
+export type GameData = {
   id: string,
   title: string,
   priceMain: number,

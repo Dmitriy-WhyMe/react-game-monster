@@ -21,7 +21,7 @@ type Games = {
   id: string
 }
 
-const Katalog: React.FC<KatalogProps> = ({ countGames, url }) => {
+const Katalog: React.FC<KatalogProps> = ({ countGames }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [games, setGames] = useState<Games[]>([])
   useEffect(() => {
@@ -36,7 +36,7 @@ const Katalog: React.FC<KatalogProps> = ({ countGames, url }) => {
         <TitleRow mainTitle="Каталог игр" buttonTitle="Все игры" buttonUrl="/catalog"/>
         <div className="flex">
           {isLoading
-            ? [...new Array(countGames)].map((_, index) => <Skeleton key={index}/>) 
+            ? [...new Array(8)].map((_, index) => <Skeleton key={index}/>) 
             : games.map(obj => <KatalogItem key={obj.id} {...obj}/>)
           }
         </div>

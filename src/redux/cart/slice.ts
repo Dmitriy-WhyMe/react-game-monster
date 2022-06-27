@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { getCartFromLocalStorage } from '../../utils/getCartFromLC'
-import { CartItem, CartSliceState } from './types'
+import { CartItemType, CartSliceState } from './types'
 
 const initialState: CartSliceState = getCartFromLocalStorage()
 
@@ -8,7 +8,7 @@ const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
-        addItem(state, action: PayloadAction<CartItem>) {
+        addItem(state, action: PayloadAction<CartItemType>) {
             const findItem = state.items.find(obj => obj.id === action.payload.id)
             if (findItem) {
                 findItem.count++
