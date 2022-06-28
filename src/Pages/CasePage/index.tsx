@@ -120,16 +120,15 @@ const Index: React.FC = () => {
             <TitleRow mainTitle={"Испытай свою удачу в кейсе: " + caseData.title} buttonTitle="Все кейсы" buttonUrl="/"/>
             <div className={style.roulletka}>
                 <RoulettePro
+                    designOptions={{
+                        prizeItemWidth: 350,
+                        prizeItemHeight: 268,
+                    }}
                     start={start}
                     prizes={prizeList}
                     prizeIndex={prizeIndex}
                     onPrizeDefined={handlePrizeDefined}
                     options={{ stopInCenter: true }}
-                    designOptions={{
-
-                        prizeItemWidth: 350,
-                        prizeItemHeight: 268,
-                    }}
                 />    
                 <button className={style.btn} onClick={handleStart}>Вращать</button>
             </div>
