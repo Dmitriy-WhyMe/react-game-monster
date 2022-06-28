@@ -8,6 +8,7 @@ import RoulettePro from 'react-roulette-pro';
 // @ts-ignore-end
 import 'react-roulette-pro/dist/index.css';
 import reproductionArray from '../../utils/reproductionArray';
+import getRandomIntInRange from '../../utils/getRandomIntInRange'
 
 export type GameArrayType = {
     text: string,
@@ -19,8 +20,11 @@ export type GameArrayType = {
 
 const Index: React.FC = () => {
     const [start, setStart] = React.useState(false)
-    const [spinning, setSpinning] = React.useState(false)
+    // eslint-disable-next-line
+    const [spinning, setSpinning] = React.useState<boolean>(false)
     const [prizeIndex, setPrizeIndex] = React.useState(0)
+    const [gameWin, setGameWin] = React.useState('')
+    const [arrGames, setArrGames] = React.useState<GameArrayType[]>([])
     const [caseData, setCaseData] = React.useState<{
         title: string,
         slug: string,
@@ -56,23 +60,29 @@ const Index: React.FC = () => {
         // eslint-disable-next-line
     }, [])
     
-    const arrGames: GameArrayType[] = caseData !== undefined ? caseData.games : []
+    React.useMemo(() => {
+        const arr: GameArrayType[] = caseData !== undefined ? caseData.games : []
+        setArrGames(arr)
+    }, [caseData])
+   
     const API = {
         getPrizeIndex: async () => {
-          const randomPrizeIndex = Math.floor(Math.random() * arrGames.length * 5)
-          return randomPrizeIndex
+            const randomPrizeIndex = getRandomIntInRange(10, prizeList.length - 1)
+            return randomPrizeIndex
         },
     }
 
     React.useEffect(() => {
-        const reproducedArray = [
-          ...reproductionArray(arrGames, arrGames.length * 5),
-        ]
-        const list = [...reproducedArray].map((item) => ({
-          ...item
-        }))
-        setPrizeList(list)
-        return
+        if(arrGames.length > 1){
+            const reproducedArray = [
+                ...reproductionArray(arrGames),
+            ]
+            const list = [...reproducedArray].map((item) => ({
+                ...item
+            }))
+            setPrizeList(list)
+            return
+        }
         // eslint-disable-next-line
     }, [arrGames])
 
@@ -89,8 +99,8 @@ const Index: React.FC = () => {
             const newPrizeIndex = await API.getPrizeIndex()
             setPrizeIndex(newPrizeIndex)
             setStart(false)
-            const { id } = prizeList[newPrizeIndex]
-            alert(id)
+            const { text } = prizeList[newPrizeIndex]
+            setGameWin(text)
         }
         prepare()
         setSpinning(true)
@@ -98,6 +108,7 @@ const Index: React.FC = () => {
     
     const handlePrizeDefined = () => {
         setSpinning(false)
+        alert("Поздравляю вы выиграли: " + gameWin)
     }
 
     if (!caseData) {
@@ -115,7 +126,7 @@ const Index: React.FC = () => {
                     onPrizeDefined={handlePrizeDefined}
                     options={{ stopInCenter: true }}
                     designOptions={{
-                        withoutAnimation: true,
+
                         prizeItemWidth: 350,
                         prizeItemHeight: 268,
                     }}

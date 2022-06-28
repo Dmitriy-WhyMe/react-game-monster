@@ -16,7 +16,7 @@ const Header: React.FC = () => {
         },
         {
             title: "Рулетка",
-            linkUrl: ""
+            linkUrl: {pathname: '/', hash: '#fortune'}
         },
         {
             title: "Новости",

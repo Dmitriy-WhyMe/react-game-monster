@@ -27,8 +27,9 @@ const Fortune: React.FC = () => {
         setIsLoading(false)
     })
   }, [])
+
   return (
-    <section className="fortune">
+    <section className="fortune" id={"fortune"}>
         <h3 className="title-block">Испытай удачу</h3>
         <div className="flex">
           {isLoading === false
