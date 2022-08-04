@@ -67,6 +67,7 @@
             @media screen and (max-width: 1359px)
                 height: auto
 .btn
+    margin-top: 330px
     background: #F59502
     border-radius: 13px
     height: 56px
@@ -80,13 +81,51 @@
     display: flex
     align-items: center
     justify-content: center
-    margin: 0 auto
-    margin-top: 55px
-    @media screen and (max-width: 767px)
-        margin-top: 20px
+    margin: auto
+    position: absolute
+    bottom: 0
+    left: 0
+    right: 0
+.animation
+    animation: roulette-horizontal-animation 100s linear infinite
+    @keyframes roulette-horizontal-animation
+        0%
+            transform: translateX(0)
+            left: 0
+        100%
+            left: -3000px
+            transform: translate3d(-3000px, 0, 0)
+
+.anim
+    transition: all 10s cubic-bezier(0.0125, 0.1, 0.1, 1) 0s
+.roulette
+    display: flex
+    position: absolute
+    top: 0
+    left: -195px
+    gap: 20px
+    .prizeItem
+        max-width: 330px
+        border-radius: 20px
+        img
+            border-radius: 20px
+            width: 330px
+            height: 228px
+            object-fit: cover
 
 .roulletka
     margin-bottom: 20px
+    padding-bottom: 306px
+    position: relative
+    .line
+        position: absolute
+        width: 3px
+        height: 228px
+        left: 0
+        right: 0
+        top: 0
+        margin: auto
+        background: red
     :global
         .roulette-pro-wrapper
             overflow: inherit
@@ -123,7 +162,7 @@
                 line-height: 125.69%
                 height: auto
                 padding: 0
-            .roulette-pro-regular-image-wrapper 
+            .roulette-pro-regular-image-wrapper
                 max-height: 218px
                 height: 100%
                 img
@@ -133,4 +172,3 @@
                     max-width: 350px
                     width: 100%
                     max-height: 210px
-                    

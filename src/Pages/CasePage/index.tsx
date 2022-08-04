@@ -3,10 +3,6 @@ import style from './CasePage.module.sass'
 import { useParams, useNavigate } from 'react-router-dom'
 import React from 'react'
 import axios from 'axios'
-// @ts-ignore-start
-import RoulettePro from 'react-roulette-pro';
-// @ts-ignore-end
-import 'react-roulette-pro/dist/index.css';
 import reproductionArray from '../../utils/reproductionArray';
 import getRandomIntInRange from '../../utils/getRandomIntInRange'
 
@@ -20,10 +16,8 @@ export type GameArrayType = {
 
 const Index: React.FC = () => {
     const [start, setStart] = React.useState(false)
-    // eslint-disable-next-line
-    const [spinning, setSpinning] = React.useState<boolean>(false)
     const [prizeIndex, setPrizeIndex] = React.useState(0)
-    const [gameWin, setGameWin] = React.useState('')
+    const [left, setLeft] = React.useState(0)
     const [arrGames, setArrGames] = React.useState<GameArrayType[]>([])
     const [caseData, setCaseData] = React.useState<{
         title: string,
@@ -87,28 +81,23 @@ const Index: React.FC = () => {
     }, [arrGames])
 
     React.useEffect(() => {
-        if (!prizeIndex || start) {
+        if (!prizeIndex) {
           return
         }
-        setStart(true)
-        // eslint-disable-next-line
-    }, [prizeIndex, start])
+    }, [prizeIndex])
 
     const handleStart = () => {
         const prepare = async () => {
             const newPrizeIndex = await API.getPrizeIndex()
             setPrizeIndex(newPrizeIndex)
-            setStart(false)
+            newPrizeIndex !== 0 ? setLeft(newPrizeIndex * 350) : setLeft(0)
+            setStart(true)
             const { text } = prizeList[newPrizeIndex]
-            setGameWin(text)
+            setTimeout(function() {
+                alert("Поздравляю вы выиграли: " + text)
+            }, 10000)
         }
         prepare()
-        setSpinning(true)
-    }
-    
-    const handlePrizeDefined = () => {
-        setSpinning(false)
-        alert("Поздравляю вы выиграли: " + gameWin)
     }
 
     if (!caseData) {
@@ -119,17 +108,14 @@ const Index: React.FC = () => {
         <div className="container">
             <TitleRow mainTitle={"Испытай свою удачу в кейсе: " + caseData.title} buttonTitle="Все кейсы" buttonUrl="/"/>
             <div className={style.roulletka}>
-                <RoulettePro
-                    designOptions={{
-                        prizeItemWidth: 350,
-                        prizeItemHeight: 268,
-                    }}
-                    start={start}
-                    prizes={prizeList}
-                    prizeIndex={prizeIndex}
-                    onPrizeDefined={handlePrizeDefined}
-                    options={{ stopInCenter: true }}
-                />    
+                <div className={`${style.roulette} ${start ? style.anim: style.animation}`} style= {start ? {left: -left+550} : {color: "yellow"}}>
+                    {prizeList.map((value, index) =>
+                        <div className={style.prizeItem} key={index}>
+                            <img src={value.image} alt=""/>
+                        </div>
+                    )}
+                </div>
+                <div className={style.line}></div>
                 <button className={style.btn} onClick={handleStart}>Вращать</button>
             </div>
             <section className={style.block}>
